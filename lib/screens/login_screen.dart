@@ -25,15 +25,20 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login '),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Login '),
+      // ),
       body: Form(
         key: userForm,
         child: Padding(
           padding: const EdgeInsets.all(13.0),
           child: Column(
             children: [
+              SizedBox(
+                height: 100,
+              ),
+              SizedBox(
+                  height: 150, child: Image.asset('assets/images/logo.png')),
               // we use a text form field inorder to acess the validator
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -63,17 +68,26 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 23,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  if (userForm.currentState!.validate()) {
-                    // create account
-                    LoginController.login(
-                        context: context,
-                        email: email.text,
-                        password: password.text);
-                  }
-                },
-                child: Text('Login'),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.green[800]),
+                      onPressed: () {
+                        if (userForm.currentState!.validate()) {
+                          // create account
+                          LoginController.login(
+                              context: context,
+                              email: email.text,
+                              password: password.text);
+                        }
+                      },
+                      child: Text('Login'),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 23,
@@ -88,7 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       'Signup here!',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.blue[400]),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green[800]),
                     ),
                     onTap: () {
                       Navigator.push(context,

@@ -19,20 +19,22 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController password = TextEditingController();
 
   // function to create account refactored to signup_controller.dart
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Signup '),
+        title: Text(''),
       ),
       body: Form(
         key: userForm,
         child: Padding(
           padding: const EdgeInsets.all(13.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                  height: 150, child: Image.asset('assets/images/logo.png')),
               // we use a text form field inorder to acess the validator
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -62,17 +64,27 @@ class _SignupScreenState extends State<SignupScreen> {
               SizedBox(
                 height: 23,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  if (userForm.currentState!.validate()) {
-                    // create account
-                    SignupController.createAccount(
-                        context: context,
-                        email: email.text,
-                        password: password.text);
-                  }
-                },
-                child: Text('Create account'),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(0, 50),
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.green[800]),
+                      onPressed: () {
+                        if (userForm.currentState!.validate()) {
+                          // create account
+                          SignupController.createAccount(
+                              context: context,
+                              email: email.text,
+                              password: password.text);
+                        }
+                      },
+                      child: Text('Create account'),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
